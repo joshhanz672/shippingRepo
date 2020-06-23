@@ -1,0 +1,61 @@
+Solution to the Shipping Quiz
+
+
+Array 1 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Array 2 [3, 2, 2, 4, 1, 4]
+Array 3 [1, 2, 3, 1, 1]
+
+
+Define a class to compute the minimum capacity for a conveyor belt, so that the entire shipment can be shipped within the time frame given in days.
+	make an empty class constructor with no methods.  None needed except to create an instance of this class.
+
+Need a ship within days int method, to take in the shipment array and the number of days
+	the int method will need two local variables, one low and one high, plus another local variable to calculate the middle which will change with the
+		conditional while loop of low being less than or equal to high.
+		
+		while loop runs while low is less than or equal to high.
+			local int mid is set to the equation of the current values:  (low + high) / 2
+			
+			a local boolean variable canShipResult calls a boolean method canIShip, pass in the weights array, days and mid
+			canShipResult is evaluated after that call, and the following happens depending on the result
+				if canShipResult is true:
+					set high to (mid - 1)
+				else (if it is false)
+					set low to (mid + 1)
+		and go back to the while loop and evaluate low, high and mid to see if the loop should continue.  
+		Otherwise go back to calling method with the final result of low.
+		
+	the boolean method canIShip will take three arguments, weights array, integer "D" as a local variable to represent the days, and 
+		int capacity to represent the variable mid which was passed in from shipWithinDays
+		
+		declare two local variables int day (to represent days being calculated for a for loop) and int w to represent a sum 
+			which will vary according to the element value of the weights array.  
+			
+		for loop runs from integer i is 0 to the length of the weights array, increment by 1
+			if (current weight element is greater than capacity value, or number of days calculated is greater than fixed days to transport)
+				return false and go back to the shipWithinDays method where canShipResult was called
+			otherwise the result is true and another if statement will need to be evaluated
+				
+			if (the sum (w + current weight element value) is greater than or equal to capacity)
+			{
+				set w = current value of weight for the current element
+				increment days calculated up by 1
+			}
+			else
+				set w to (w + current weight element value)
+			
+		when the array runs out of elements to evaluate, check if days calculated is less than or equal to fixed days to transport
+		return the value regardless of the result to shipWithinDays line where canIShip was called.
+		
+	No futher methods in the class are required.
+	
+In Main class, declare a class handle to the ship calculation class, and refer to it as a new call to its constructor.	
+declare a local integer to get the result of a call to shipWithinDays method.
+
+call ship calculation class method shipWithinDays, pass in Array 1 and 5 as arguments
+
+Do the same with Array 2 and 3, then Array 3 and 4.
+
+For array 1 you should get an output of 15
+for array 2 you should get an output of 6
+for array 3 you should get an output of 3
